@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uTestAlcancia", "uTestAlcancia\uTestAlcancia.csproj", "{F1519B28-C4E1-42B2-97C8-C203AA39CEF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stmaAlcancia", "stmaAlcancia\stmaAlcancia.csproj", "{436CBF6E-B28C-415B-82B3-F88128DF9027}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1519B28-C4E1-42B2-97C8-C203AA39CEF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1519B28-C4E1-42B2-97C8-C203AA39CEF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1519B28-C4E1-42B2-97C8-C203AA39CEF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1519B28-C4E1-42B2-97C8-C203AA39CEF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{436CBF6E-B28C-415B-82B3-F88128DF9027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{436CBF6E-B28C-415B-82B3-F88128DF9027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{436CBF6E-B28C-415B-82B3-F88128DF9027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{436CBF6E-B28C-415B-82B3-F88128DF9027}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {19432147-FAEA-4BC8-B035-C0BAB3818779}
+	EndGlobalSection
+EndGlobal
