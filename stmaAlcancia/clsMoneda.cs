@@ -73,7 +73,7 @@
             return atrPropetario;
         }
         /// <summary>
-        /// Devuelve la alcania
+        /// Devuelve un objeto de tipo alcancia
         /// </summary>
         /// <returns> Objeto de tipo alcancia </returns>
         public clsAlcancia darAlcancia()
