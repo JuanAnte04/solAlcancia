@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using appAlcancia.Dominio;
 
 namespace uTestAlcancia
@@ -7,16 +6,24 @@ namespace uTestAlcancia
     [TestClass]
     public class uTestBillete
     {
+        private clsBillete ObjBillete;
         [TestMethod]
-        public void uTestConstructor()
+        public void uTestdarMes()
         {
-
+            ObjBillete = new clsBillete();
+            Assert.AreEqual(-1, ObjBillete.darMes());
         }
         [TestMethod]
-        public void uTestAccesores()
+        public void uTestdarDia()
         {
-            clsBillete varObjeto = new clsBillete(1000, 4, 11, 2000, 9);
-            Assert.AreEqual(4, varObjeto.darDia());
+            ObjBillete = new clsBillete();
+            Assert.AreEqual(-1, ObjBillete.darDia());
+        }
+        [TestMethod]
+        public void uTestdarSerial()
+        {
+            ObjBillete = new clsBillete();
+            Assert.AreEqual(-1, ObjBillete.darSerial());
         }
     }
 }

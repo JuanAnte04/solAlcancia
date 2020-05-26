@@ -53,8 +53,7 @@ namespace appAlcancia.Dominio
         /// <returns> Entero </returns>
         public int darOID()
         {
-            //To-do: Implementar
-            return 0;
+            return atrOID;
         }
         /// <summary>
         /// Devuelve el nombre de persona
@@ -62,8 +61,7 @@ namespace appAlcancia.Dominio
         /// <returns> Cadena de caracteres </returns>
         public string darNombre()
         {
-            //To-do: Implementar
-            return null;
+            return atrNombre;
         }
         /// <summary>
         /// Devuelve una alcancia

@@ -9,11 +9,11 @@ namespace appAlcancia.Dominio
         /// <summary>
         /// Cantidad maxima de monedas que puede albergar la alcancia
         /// </summary>
-        private int capacidadMonedas = -1;
+        private int atrCapacidadMonedas = -1;
         /// <summary>
         /// Cantidad maxima de billetes que puede albergar la alcancia
         /// </summary>
-        private int capacidadBilletes = -1;
+        private int atrCapacidadBilletes = -1;
         #endregion
         #region Asociativos
         /// <summary>
@@ -53,8 +53,7 @@ namespace appAlcancia.Dominio
         /// <returns> Entero </returns>
         public int darCapacidadMonedas()
         {
-            //To-do: Implementar
-            return 0;
+            return atrCapacidadMonedas;
         }
         /// <summary>
         /// Devuelve la cantidad maxima de billetes en la alcancia
@@ -62,8 +61,7 @@ namespace appAlcancia.Dominio
         /// <returns> Entero </returns>
         public int darCapacidadBilletes()
         {
-            //To-do: Implementar
-            return 0;
+            return atrCapacidadBilletes;
         }
         #endregion
         #region Mutadores

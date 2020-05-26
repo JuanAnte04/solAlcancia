@@ -39,6 +39,13 @@
         {
             //To-do: Implementar
         }
+        public void Generar()
+        {
+            atrDenominacion = 500;
+            atrAño = 1984;
+            atrAlcancia = new clsAlcancia();
+            atrPropetario = new clsPersona();
+        }
         #endregion
         #region Accesores
         /// <summary>
@@ -47,8 +54,7 @@
         /// <returns> Entero </returns>
         public int darDenominacion()
         {
-            //To-do: Implementar
-            return 0;
+            return atrDenominacion;
         }
         /// <summary>
         /// Devuelve el año de emision
@@ -56,8 +62,7 @@
         /// <returns> Entero </returns>
         public int darAño()
         {
-            //To-do: Implementar
-            return 0;
+            return atrAño;
         }
         /// <summary>
         /// Devuelve el propietario
@@ -65,8 +70,7 @@
         /// <returns> Objeto de tipo persona </returns>
         public clsPersona darPropietario()
         {
-            //To-do: Implementar
-            return null;
+            return atrPropetario;
         }
         /// <summary>
         /// Devuelve la alcania
@@ -74,8 +78,7 @@
         /// <returns> Objeto de tipo alcancia </returns>
         public clsAlcancia darAlcancia()
         {
-            //To-do: Implementar
-            return null;
+            return atrAlcancia;
         }
         #endregion
         #region Mutadores

@@ -48,8 +48,7 @@ namespace appAlcancia.Dominio
         /// <returns> Entero </returns>
         public int darMes()
         {
-            //To-do: Implementar
-            return 0;
+            return atrMes;
         }
         /// <summary>
         /// Devuelve el dia de emision
@@ -57,8 +56,7 @@ namespace appAlcancia.Dominio
         /// <returns> Entero </returns>
         public int darDia()
         {
-            //To-do: Implementar
-            return 0;
+            return atrDia;
         }
         /// <summary>
         /// Devuelve el serial del billete
@@ -66,8 +64,7 @@ namespace appAlcancia.Dominio
         /// <returns> Entero </returns>
         public int darSerial()
         {
-            //To-do: Implementar
-            return 0;
+            return atrSerial;
         }
         #endregion
         #region Mutadores
