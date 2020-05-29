@@ -45,6 +45,12 @@ namespace appAlcancia.Dominio
         {
             //To-do: Implementar
         }
+        public void Generar()
+        {
+            atrAlcancia = new clsAlcancia();
+            atrNombre = "Jorge Jair";
+            atrOID = 1898;
+        }
         #endregion
         #region Accesores
         /// <summary>
@@ -69,8 +75,7 @@ namespace appAlcancia.Dominio
         /// <returns> Objeto de tipo alcancia </returns>
         public clsAlcancia darAlcancia()
         {
-            //To-do: Implementar
-            return null;
+            return atrAlcancia;
         }
         #endregion
         #region Mutadores
@@ -80,7 +85,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmNombre"> Nuevo nombre </param>
         public void Poner(string prmNombre)
         {
-            //To-do: Implementar
+            atrNombre = prmNombre;
         }
         /// <summary>
         /// Modifica la alcancia
@@ -88,7 +93,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmObjeto"> Objeto de tipo alcancia </param>
         public void Poner(clsAlcancia prmObjeto)
         {
-            //To-do: Implementar
+            atrAlcancia = prmObjeto;
         }
         #endregion
         #region Asociadores

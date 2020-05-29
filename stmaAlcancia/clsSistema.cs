@@ -28,6 +28,13 @@ namespace appAlcancia.Dominio
         #endregion
         #region Metodos
         #region Constructores
+        /// <summary>
+        /// Solo para pruebas
+        /// </summary>
+        public void Generar()
+        {
+            atrAlcancia = new clsAlcancia();
+        }
         #endregion
         #region Accesores
         /// <summary>
@@ -36,8 +43,7 @@ namespace appAlcancia.Dominio
         /// <returns> Tipo Alcancia </returns>
         public clsAlcancia darAlcancia()
         {
-            //To-do: Implementar
-            return null;
+            return atrAlcancia;
         }
         #endregion
         #region Mutadores
