@@ -45,6 +45,13 @@ namespace appAlcancia.Dominio
         {
             //To-do: Implementar
         }
+        public void Generar()
+        {
+            atrMonedas = new List<clsMoneda>();
+            atrMonedas.Add(new clsMoneda(500, 1999));
+            atrMonedas.Add(new clsMoneda(100, 1998));
+            atrMonedas.Add(new clsMoneda(500, 1997));
+        }
         #endregion
         #region Accesores
         /// <summary>
@@ -142,7 +149,15 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool recuperar(int prmOID, ref clsPersona prmObjeto)
         {
-            //To-do: Implementar
+            foreach(clsPersona varObjeto in atrAhorradores)
+            {
+                if (varObjeto.darOID() == prmOID)
+                {
+                    prmObjeto = varObjeto;
+                    return true;
+                }
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>
@@ -153,7 +168,15 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool recuperar(int prmDenominacion, ref clsMoneda prmObjeto)
         {
-            //To-do: Implementar
+            foreach (clsMoneda varObjeto in atrMonedas)
+            {
+                if (varObjeto.darDenominacion() == prmDenominacion)
+                {
+                    prmObjeto = varObjeto;
+                    return true;
+                }
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>

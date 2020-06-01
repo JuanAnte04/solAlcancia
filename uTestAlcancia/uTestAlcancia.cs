@@ -7,13 +7,24 @@ namespace uTestAlcancia
     [TestClass]
     public class uTestAlcancia
     {
-        private clsAlcancia objAlcancia;
+        private clsAlcancia ObjAlcancia;
+        private clsMoneda ObjMoneda;
         [TestMethod]
         public void uTestdarCapacidad()
         {
-            objAlcancia = new clsAlcancia();
-            Assert.AreEqual(-1, objAlcancia.darCapacidadMonedas());
-            Assert.AreEqual(-1, objAlcancia.darCapacidadBilletes());
+            ObjAlcancia = new clsAlcancia();
+            Assert.AreEqual(-1, ObjAlcancia.darCapacidadMonedas());
+            Assert.AreEqual(-1, ObjAlcancia.darCapacidadBilletes());
+        }
+        [TestMethod]
+        public void uTestrecuperarMoneda()
+        {
+            ObjAlcancia = new clsAlcancia();
+            ObjAlcancia.Generar();
+            ObjMoneda = new clsMoneda();
+            Assert.AreEqual(true, ObjAlcancia.recuperar(500, ref ObjMoneda));
+            Assert.AreNotEqual(null, ObjMoneda);
+            Assert.AreEqual(500, ObjMoneda.darDenominacion());
         }
     }
 }

@@ -14,5 +14,12 @@ namespace uTestAlcancia
             ObjSistema.Generar();
             Assert.AreNotEqual(null, ObjSistema.darAlcancia());
         }
+        [TestMethod]
+        public void uTestponerAlcancia()
+        {
+            ObjSistema = new clsSistema();
+            Assert.AreEqual(true, ObjSistema.poner(new clsAlcancia()));
+            Assert.AreNotEqual(null, ObjSistema.darAlcancia());
+        }
     }
 }

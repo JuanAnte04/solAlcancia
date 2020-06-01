@@ -33,5 +33,19 @@ namespace uTestAlcancia
             ObjMoneda.Generar();
             Assert.AreNotEqual(null, ObjMoneda.darAlcancia());
         }
+        [TestMethod]
+        public void uTestponerPropietario()
+        {
+            ObjMoneda = new clsMoneda();
+            Assert.AreEqual(true, ObjMoneda.Poner(new clsPersona()));
+            Assert.AreNotEqual(null, ObjMoneda.darPropietario());
+        }
+        [TestMethod]
+        public void uTestponerAlcancia()
+        {
+            ObjMoneda = new clsMoneda();
+            Assert.AreEqual(true, ObjMoneda.Poner(new clsAlcancia()));
+            Assert.AreNotEqual(null, ObjMoneda.darAlcancia());
+        }
     }
 }

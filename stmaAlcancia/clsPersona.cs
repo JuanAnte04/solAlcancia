@@ -91,9 +91,10 @@ namespace appAlcancia.Dominio
         /// Modifica la alcancia
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo alcancia </param>
-        public void Poner(clsAlcancia prmObjeto)
+        public bool Poner(clsAlcancia prmObjeto)
         {
             atrAlcancia = prmObjeto;
+            return true;
         }
         #endregion
         #region Asociadores

@@ -40,7 +40,7 @@ namespace uTestAlcancia
         public void uTestponerAlcancia()
         {
             ObjPersona = new clsPersona();
-            ObjPersona.Poner(new clsAlcancia());
+            Assert.AreEqual(true, ObjPersona.Poner(new clsAlcancia()));
             Assert.AreNotEqual(null, ObjPersona.darAlcancia());
         }
         #endregion

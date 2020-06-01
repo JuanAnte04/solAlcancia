@@ -54,8 +54,8 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool poner(clsAlcancia prmObjeto)
         {
-            //To-do: Implementar
-            return false;
+            atrAlcancia = prmObjeto;
+            return true;
         }
         #endregion
         #region Asociadores

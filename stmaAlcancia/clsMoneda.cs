@@ -37,7 +37,8 @@
         /// <param name="prmAño"> Año de emision </param>
         public clsMoneda(int prmDenominacion, int prmAño)
         {
-            //To-do: Implementar
+            atrDenominacion = prmDenominacion;
+            atrAño = prmAño;
         }
         public void Generar()
         {
@@ -89,8 +90,8 @@
         /// <returns> Boolean </returns>
         public bool Poner(clsPersona prmObjeto)
         {
-            //To-do: Implementar
-            return false;
+            atrPropetario = prmObjeto;
+            return true;
         }
         /// <summary>
         /// Modifica la alcancia
@@ -99,8 +100,8 @@
         /// <returns> Boolean </returns>
         public bool Poner(clsAlcancia prmObjeto)
         {
-            //To-do: Implementar
-            return false;
+            atrAlcancia = prmObjeto;
+            return true;
         }
         #endregion
         #region Asociadores
