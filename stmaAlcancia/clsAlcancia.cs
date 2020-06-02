@@ -43,14 +43,20 @@ namespace appAlcancia.Dominio
         /// <param name="prmCapacidadBilletes"> Cantidad maxima de billetes </param>
         public clsAlcancia(int prmCapacidadMonedas, int prmCapacidadBilletes)
         {
-            //To-do: Implementar
+            atrCapacidadMonedas = prmCapacidadMonedas;
+            atrCapacidadBilletes = prmCapacidadBilletes;
         }
         public void Generar()
         {
             atrMonedas = new List<clsMoneda>();
-            atrMonedas.Add(new clsMoneda(500, 1999));
+            atrMonedas.Add(new clsMoneda());
             atrMonedas.Add(new clsMoneda(100, 1998));
-            atrMonedas.Add(new clsMoneda(500, 1997));
+            atrBilletes = new List<clsBillete>();
+            atrBilletes.Add(new clsBillete());
+            atrBilletes.Add(new clsBillete(5000, 27, 2, 1999, 1889));
+            atrAhorradores = new List<clsPersona>();
+            atrAhorradores.Add(new clsPersona());
+            atrAhorradores.Add(new clsPersona(1062, "Jaime"));
         }
         #endregion
         #region Accesores
@@ -187,7 +193,15 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool recuperar(int prmDenominacion, ref clsBillete prmObjeto)
         {
-            //To-do: Implementar
+            foreach (clsBillete varObjeto in atrBilletes)
+            {
+                if (varObjeto.darDenominacion() == prmDenominacion)
+                {
+                    prmObjeto = varObjeto;
+                    return true;
+                }
+            }
+            prmObjeto = null;
             return false;
         }
         #endregion

@@ -7,6 +7,7 @@ namespace uTestAlcancia
     public class uTestMoneda
     {
         private clsMoneda ObjMoneda;
+        #region Accesores
         [TestMethod]
         public void uTestdarDenominacion()
         {
@@ -33,6 +34,8 @@ namespace uTestAlcancia
             ObjMoneda.Generar();
             Assert.AreNotEqual(null, ObjMoneda.darAlcancia());
         }
+        #endregion
+        #region Mutadores
         [TestMethod]
         public void uTestponerPropietario()
         {
@@ -46,6 +49,15 @@ namespace uTestAlcancia
             ObjMoneda = new clsMoneda();
             Assert.AreEqual(true, ObjMoneda.Poner(new clsAlcancia()));
             Assert.AreNotEqual(null, ObjMoneda.darAlcancia());
+        }
+        #endregion
+        [TestMethod]
+        public void uTestConstructorPrm()
+        {
+            ObjMoneda = new clsMoneda(500, 1999);
+            Assert.AreNotEqual(null, ObjMoneda);
+            Assert.AreEqual(500, ObjMoneda.darDenominacion());
+            Assert.AreEqual(1999, ObjMoneda.darAño());
         }
     }
 }

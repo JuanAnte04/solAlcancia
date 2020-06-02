@@ -42,10 +42,8 @@
         }
         public void Generar()
         {
-            atrDenominacion = 500;
-            atrAño = 1984;
-            atrAlcancia = new clsAlcancia();
             atrPropetario = new clsPersona();
+            atrAlcancia = new clsAlcancia();
         }
         #endregion
         #region Accesores

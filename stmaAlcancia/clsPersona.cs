@@ -43,13 +43,18 @@ namespace appAlcancia.Dominio
         /// <param name="prmNombre"> Nombre de la persona </param>
         public clsPersona(int prmOID, string prmNombre)
         {
-            //To-do: Implementar
+            atrOID = prmOID;
+            atrNombre = prmNombre;
         }
         public void Generar()
         {
             atrAlcancia = new clsAlcancia();
-            atrNombre = "Jorge Jair";
-            atrOID = 1898;
+            atrMonedas = new List<clsMoneda>();
+            atrMonedas.Add(new clsMoneda());
+            atrMonedas.Add(new clsMoneda(500, 1998));
+            atrBilletes = new List<clsBillete>();
+            atrBilletes.Add(new clsBillete());
+            atrBilletes.Add(new clsBillete(2000, 26, 1, 1998, 1888));
         }
         #endregion
         #region Accesores
@@ -152,7 +157,15 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool Recuperar(int prmDenominacion, ref clsMoneda prmObjeto)
         {
-            //To-do: Implementar
+            foreach (clsMoneda varObjeto in atrMonedas)
+            {
+                if (varObjeto.darDenominacion() == prmDenominacion)
+                {
+                    prmObjeto = varObjeto;
+                    return true;
+                }
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>
@@ -163,7 +176,15 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool Recuperar(int prmDenominacion, ref clsBillete prmObjeto)
         {
-            //To-do: Implementar
+            foreach (clsBillete varObjeto in atrBilletes)
+            {
+                if (varObjeto.darDenominacion() == prmDenominacion)
+                {
+                    prmObjeto = varObjeto;
+                    return true;
+                }
+            }
+            prmObjeto = null;
             return false;
         }
         #endregion

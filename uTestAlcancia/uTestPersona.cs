@@ -7,6 +7,8 @@ namespace uTestAlcancia
     public class uTestPersona
     {
         private clsPersona ObjPersona;
+        private clsMoneda ObjMoneda;
+        private clsBillete ObjBillete;
         #region Accesores
         [TestMethod]
         public void uTestdarOID()
@@ -42,6 +44,36 @@ namespace uTestAlcancia
             ObjPersona = new clsPersona();
             Assert.AreEqual(true, ObjPersona.Poner(new clsAlcancia()));
             Assert.AreNotEqual(null, ObjPersona.darAlcancia());
+        }
+        #endregion
+        #region Constructor
+        [TestMethod]
+        public void uTestConstructorPrm()
+        {
+            ObjPersona = new clsPersona(1061, "Juan");
+            Assert.AreNotEqual(null, ObjPersona);
+            Assert.AreEqual(1061, ObjPersona.darOID());
+            Assert.AreEqual("Juan", ObjPersona.darNombre());
+        }
+        #endregion
+        #region Recuperadores
+        [TestMethod]
+        public void uTestRecuperarMoneda()
+        {
+            ObjPersona = new clsPersona();
+            ObjPersona.Generar();
+            ObjMoneda = new clsMoneda();
+            Assert.AreEqual(true, ObjPersona.Recuperar(500, ref ObjMoneda));
+            Assert.AreEqual(500, ObjMoneda.darDenominacion());
+        }
+        [TestMethod]
+        public void uTestRecuperarBillete()
+        {
+            ObjPersona = new clsPersona();
+            ObjPersona.Generar();
+            ObjBillete = new clsBillete();
+            Assert.AreEqual(true, ObjPersona.Recuperar(2000, ref ObjBillete));
+            Assert.AreEqual(2000, ObjBillete.darDenominacion());
         }
         #endregion
     }

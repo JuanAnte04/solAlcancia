@@ -36,9 +36,11 @@ namespace appAlcancia.Dominio
         /// <param name="prmMes"> Mes de emision </param>
         /// <param name="prmAño"> Año de emision </param>
         /// <param name="prmSerial"> Numero serial del billete </param>
-        public clsBillete(int prmDenominacion, int prmDia, int prmMes, int prmAño, int prmSerial)
+        public clsBillete(int prmDenominacion, int prmDia, int prmMes, int prmAño, int prmSerial):base(prmDenominacion, prmAño)
         {
-            //To-do: Implementar
+            atrDia = prmDia;
+            atrMes = prmMes;
+            atrSerial = prmSerial;
         }
         #endregion
         #region Accesores
