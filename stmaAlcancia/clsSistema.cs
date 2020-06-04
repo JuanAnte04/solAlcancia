@@ -41,7 +41,7 @@ namespace appAlcancia.Dominio
 
             atrBilletes = new List<clsBillete>();
             atrBilletes.Add(new clsBillete());
-            atrBilletes.Add(new clsBillete(5000, 27, 2, 1999, 1889));
+            atrBilletes.Add(new clsBillete(5000, 27, 2, 1999, "1889"));
 
             atrAhorradores = new List<clsPersona>();
             atrAhorradores.Add(new clsPersona());
@@ -78,7 +78,12 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool asociar(clsPersona prmObjeto)
         {
-            //To-do: Implementar
+            clsPersona varObjPersona = new clsPersona();
+            if (recuperar(prmObjeto.darOID(), ref varObjPersona) == false)
+            {
+                atrAhorradores.Add(prmObjeto);
+                return true;
+            }
             return false;
         }
         /// <summary>
@@ -88,8 +93,8 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool asociar(clsMoneda prmObjeto)
         {
-            //To-do: Implementar
-            return false;
+            atrMonedas.Add(prmObjeto);
+            return true;
         }
         /// <summary>
         /// Asocia un billete
@@ -98,7 +103,12 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool asociar(clsBillete prmObjeto)
         {
-            //To-do: Implementar
+            clsBillete varObjBillete = new clsBillete();
+            if (recuperar(prmObjeto.darSerial(), ref varObjBillete) == false)
+            {
+                atrBilletes.Add(prmObjeto);
+                return true;
+            }
             return false;
         }
         #endregion
@@ -187,6 +197,19 @@ namespace appAlcancia.Dominio
             foreach (clsBillete varObjeto in atrBilletes)
             {
                 if (varObjeto.darDenominacion() == prmDenominacion)
+                {
+                    prmObjeto = varObjeto;
+                    return true;
+                }
+            }
+            prmObjeto = null;
+            return false;
+        }
+        public bool recuperar(string prmSerial, ref clsBillete prmObjeto)
+        {
+            foreach (clsBillete varObjeto in atrBilletes)
+            {
+                if (varObjeto.darSerial() == prmSerial)
                 {
                     prmObjeto = varObjeto;
                     return true;

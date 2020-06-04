@@ -54,7 +54,7 @@ namespace appAlcancia.Dominio
 
             atrBilletes = new List<clsBillete>();
             atrBilletes.Add(new clsBillete());
-            atrBilletes.Add(new clsBillete(5000, 27, 2, 1999, 1889));
+            atrBilletes.Add(new clsBillete(5000, 27, 2, 1999, "1889"));
 
             atrAhorradores = new List<clsPersona>();
             atrAhorradores.Add(new clsPersona());

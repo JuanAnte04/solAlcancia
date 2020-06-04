@@ -92,7 +92,7 @@ namespace uTestAlcancia
         {
             ObjPersona = new clsPersona();
             ObjPersona.Generar();
-            ObjBillete = new clsBillete(20000, 5, 6, 2016, 2180);
+            ObjBillete = new clsBillete(20000, 5, 6, 2016, "2180");
             Assert.AreEqual(true, ObjPersona.asociar(ObjBillete));
             Assert.AreEqual(true, ObjPersona.Recuperar(20000, ref ObjBilleteEsperado));
             Assert.AreEqual(ObjBilleteEsperado, ObjBillete);

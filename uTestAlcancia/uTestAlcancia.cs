@@ -64,7 +64,7 @@ namespace uTestAlcancia
         public void uTestAsociarBillete()
         {
             ObjAlcancia = new clsAlcancia();
-            ObjBillete = new clsBillete(50000, 6, 7, 2003, 5670);
+            ObjBillete = new clsBillete(50000, 6, 7, 2003, "5670");
             ObjAlcancia.Generar();
             Assert.AreEqual(true, ObjAlcancia.asociar(ObjBillete));
             Assert.AreEqual(true, ObjAlcancia.recuperar(50000, ref ObjBilleteEsperado));

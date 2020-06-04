@@ -56,7 +56,7 @@ namespace appAlcancia.Dominio
 
             atrBilletes = new List<clsBillete>();
             atrBilletes.Add(new clsBillete());
-            atrBilletes.Add(new clsBillete(2000, 26, 1, 1998, 1888));
+            atrBilletes.Add(new clsBillete(2000, 26, 1, 1998, "1888"));
         }
         #endregion
         #region Accesores

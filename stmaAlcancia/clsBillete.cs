@@ -9,7 +9,7 @@ namespace appAlcancia.Dominio
         /// <summary>
         /// Serial del billete, atributo identificador (OID) de billete
         /// </summary>
-        private int atrSerial = -1;
+        private string atrSerial = "-1";
         /// <summary>
         /// Dia de emision
         /// </summary>
@@ -36,7 +36,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmMes"> Mes de emision </param>
         /// <param name="prmAño"> Año de emision </param>
         /// <param name="prmSerial"> Numero serial del billete </param>
-        public clsBillete(int prmDenominacion, int prmDia, int prmMes, int prmAño, int prmSerial):base(prmDenominacion, prmAño)
+        public clsBillete(int prmDenominacion, int prmDia, int prmMes, int prmAño, string prmSerial):base(prmDenominacion, prmAño)
         {
             atrDia = prmDia;
             atrMes = prmMes;
@@ -64,7 +64,7 @@ namespace appAlcancia.Dominio
         /// Devuelve el serial del billete
         /// </summary>
         /// <returns> Entero </returns>
-        public int darSerial()
+        public string darSerial()
         {
             return atrSerial;
         }
