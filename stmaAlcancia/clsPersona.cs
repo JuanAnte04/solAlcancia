@@ -49,9 +49,11 @@ namespace appAlcancia.Dominio
         public void Generar()
         {
             atrAlcancia = new clsAlcancia();
+
             atrMonedas = new List<clsMoneda>();
             atrMonedas.Add(new clsMoneda());
             atrMonedas.Add(new clsMoneda(500, 1998));
+
             atrBilletes = new List<clsBillete>();
             atrBilletes.Add(new clsBillete());
             atrBilletes.Add(new clsBillete(2000, 26, 1, 1998, 1888));
@@ -110,8 +112,8 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool asociar(clsMoneda prmObjeto)
         {
-            //To-do: Implementar
-            return false;
+            atrMonedas.Add(prmObjeto);
+            return true;
         }
         /// <summary>
         /// Asocia una instancia de billete
@@ -120,8 +122,8 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool asociar(clsBillete prmObjeto)
         {
-            //To-do: Implementar
-            return false;
+            atrBilletes.Add(prmObjeto);
+            return true;
         }
         #endregion
         #region Disociadores

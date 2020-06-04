@@ -34,6 +34,18 @@ namespace appAlcancia.Dominio
         public void Generar()
         {
             atrAlcancia = new clsAlcancia();
+
+            atrMonedas = new List<clsMoneda>();
+            atrMonedas.Add(new clsMoneda());
+            atrMonedas.Add(new clsMoneda(100, 1998));
+
+            atrBilletes = new List<clsBillete>();
+            atrBilletes.Add(new clsBillete());
+            atrBilletes.Add(new clsBillete(5000, 27, 2, 1999, 1889));
+
+            atrAhorradores = new List<clsPersona>();
+            atrAhorradores.Add(new clsPersona());
+            atrAhorradores.Add(new clsPersona(1062, "Jaime"));
         }
         #endregion
         #region Accesores
@@ -134,7 +146,15 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool recuperar(int prmOID, ref clsPersona prmObjeto)
         {
-            //To-do: Implementar
+            foreach (clsPersona varObjeto in atrAhorradores)
+            {
+                if (varObjeto.darOID() == prmOID)
+                {
+                    prmObjeto = varObjeto;
+                    return true;
+                }
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>
@@ -145,7 +165,15 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool recuperar(int prmDenominacion, ref clsMoneda prmObjeto)
         {
-            //To-do: Implementar
+            foreach (clsMoneda varObjeto in atrMonedas)
+            {
+                if (varObjeto.darDenominacion() == prmDenominacion)
+                {
+                    prmObjeto = varObjeto;
+                    return true;
+                }
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>
@@ -156,7 +184,15 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool recuperar(int prmDenominacion, ref clsBillete prmObjeto)
         {
-            //To-do: Implementar
+            foreach (clsBillete varObjeto in atrBilletes)
+            {
+                if (varObjeto.darDenominacion() == prmDenominacion)
+                {
+                    prmObjeto = varObjeto;
+                    return true;
+                }
+            }
+            prmObjeto = null;
             return false;
         }
         #endregion
