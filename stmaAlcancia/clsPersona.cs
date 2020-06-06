@@ -84,6 +84,22 @@ namespace appAlcancia.Dominio
         {
             return atrAlcancia;
         }
+        /// <summary>
+        /// Devuelve copia de la coleccion monedas almacenadas
+        /// </summary>
+        /// <returns> Lista tipo clsMoneda </returns>
+        public List<clsMoneda> darMonedas()
+        {
+            return atrMonedas;
+        }
+        /// <summary>
+        /// Devuelve copia de la coleccion billetes almacenadas
+        /// </summary>
+        /// <returns> Lista tipo clsBillete </returns>
+        public List<clsBillete> darBilletes()
+        {
+            return atrBilletes;
+        }
         #endregion
         #region Mutadores
         /// <summary>
@@ -133,9 +149,15 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de moneda </param>
         /// <param name="prmObjeto"> Objeto de tipo moneda </param>
         /// <returns> Boolean </returns>
-        public bool disociador(int prmDenominacion, ref clsMoneda prmObjeto)
+        public bool disociar(int prmDenominacion, ref clsMoneda prmObjeto)
         {
-            //To-do: Implementar
+            clsMoneda varObjeto = null;
+            if (Recuperar(prmDenominacion, ref varObjeto) == true)
+            {
+                prmObjeto = varObjeto;
+                return atrMonedas.Remove(prmObjeto);
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>
@@ -144,9 +166,15 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de billete </param>
         /// <param name="prmObjeto"> Objeto de tipo billete </param>
         /// <returns> Boolean </returns>
-        public bool disociador(int prmDenominacion, ref clsBillete prmObjeto)
+        public bool disociar(int prmDenominacion, ref clsBillete prmObjeto)
         {
-            //To-do: Implementar
+            clsBillete varObjeto = null;
+            if (Recuperar(prmDenominacion, ref varObjeto) == true)
+            {
+                prmObjeto = varObjeto;
+                return atrBilletes.Remove(prmObjeto);
+            }
+            prmObjeto = null;
             return false;
         }
         #endregion

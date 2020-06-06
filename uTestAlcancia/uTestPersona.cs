@@ -98,5 +98,29 @@ namespace uTestAlcancia
             Assert.AreEqual(ObjBilleteEsperado, ObjBillete);
         }
         #endregion
+        #region Disociadores
+        [TestMethod]
+        public void uTestDisociarMoneda()
+        {
+            ObjPersona = new clsPersona();
+            ObjPersona.Generar();
+            ObjMoneda = null;
+            int varCantidadMonedas = ObjPersona.darMonedas().Count;
+            Assert.AreEqual(true, ObjPersona.disociar(500, ref ObjMoneda));
+            Assert.AreEqual(500, ObjMoneda.darDenominacion());
+            Assert.AreEqual(varCantidadMonedas - 1, ObjPersona.darMonedas().Count);
+        }
+        [TestMethod]
+        public void uTestDisociarBilleteDenominacion()
+        {
+            ObjPersona = new clsPersona();
+            ObjPersona.Generar();
+            ObjBillete = null;
+            int varCantidadBilletes = ObjPersona.darBilletes().Count;
+            Assert.AreEqual(true, ObjPersona.disociar(2000, ref ObjBillete));
+            Assert.AreEqual(2000, ObjBillete.darDenominacion());
+            Assert.AreEqual(varCantidadBilletes - 1, ObjPersona.darBilletes().Count);
+        }
+        #endregion
     }
 }

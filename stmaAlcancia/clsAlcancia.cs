@@ -78,6 +78,30 @@ namespace appAlcancia.Dominio
         {
             return atrCapacidadBilletes;
         }
+        /// <summary>
+        /// Devuelve copia de la coleccion personas almacenadas
+        /// </summary>
+        /// <returns> Lista tipo clsPersona </returns>
+        public List<clsPersona> darPersonas()
+        {
+            return atrAhorradores;
+        }
+        /// <summary>
+        /// Devuelve copia de la coleccion monedas almacenadas
+        /// </summary>
+        /// <returns> Lista tipo clsMoneda </returns>
+        public List<clsMoneda> darMonedas()
+        {
+            return atrMonedas;
+        }
+        /// <summary>
+        /// Devuelve copia de la coleccion billetes almacenadas
+        /// </summary>
+        /// <returns> Lista tipo clsBillete </returns>
+        public List<clsBillete> darBilletes()
+        {
+            return atrBilletes;
+        }
         #endregion
         #region Mutadores
         #endregion
@@ -120,9 +144,15 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID"> Identificador de persona </param>
         /// <param name="prmObjeto"> Objeto de tipo persona </param>
         /// <returns> Boolean </returns>
-        public bool disociador(int prmOID, ref clsPersona prmObjeto)
+        public bool disociar(int prmOID, ref clsPersona prmObjeto)
         {
-            //To-do: Implementar
+            clsPersona varObjeto = null;
+            if (recuperar(prmOID, ref varObjeto) == true)
+            {
+                prmObjeto = varObjeto;
+                return atrAhorradores.Remove(prmObjeto);
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>
@@ -131,9 +161,15 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de moneda </param>
         /// <param name="prmObjeto"> Objeto de tipo moneda </param>
         /// <returns> Boolean </returns>
-        public bool disociador(int prmDenominacion, ref clsMoneda prmObjeto)
+        public bool disociar(int prmDenominacion, ref clsMoneda prmObjeto)
         {
-            //To-do: Implementar
+            clsMoneda varObjeto = null;
+            if (recuperar(prmDenominacion, ref varObjeto) == true)
+            {
+                prmObjeto = varObjeto;
+                return atrMonedas.Remove(prmObjeto);
+            }
+            prmObjeto = null;
             return false;
         }
         /// <summary>
@@ -142,9 +178,15 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de tipo billete </param>
         /// <param name="prmObjeto"> Objeto de tipo billete </param>
         /// <returns> Boolean </returns>
-        public bool disociador(int prmDenominacion, ref clsBillete prmObjeto)
+        public bool disociar(int prmDenominacion, ref clsBillete prmObjeto)
         {
-            //To-do: Implementar
+            clsBillete varObjeto = null;
+            if (recuperar(prmDenominacion, ref varObjeto) == true)
+            {
+                prmObjeto = varObjeto;
+                return atrBilletes.Remove(prmObjeto);
+            }
+            prmObjeto = null;
             return false;
         }
         #endregion
