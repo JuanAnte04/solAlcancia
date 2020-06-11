@@ -4,6 +4,7 @@ using appAlcancia.Dominio;
 
 namespace uTestAlcancia
 {
+    //Generar y constructor no prm
     [TestClass]
     public class uTestAlcancia
     {
@@ -12,10 +13,15 @@ namespace uTestAlcancia
         private clsBillete ObjBillete, ObjBilleteEsperado;
         private clsPersona ObjPersona, ObjPersonaEsperada;
         [TestMethod]
-        public void uTestdarCapacidad()
+        public void uTestdarCapacidadMonedas()
         {
             ObjAlcancia = new clsAlcancia();
             Assert.AreEqual(-1, ObjAlcancia.darCapacidadMonedas());
+        }
+        [TestMethod]
+        public void uTestdarCapacidadBilletes()
+        {
+            ObjAlcancia = new clsAlcancia();
             Assert.AreEqual(-1, ObjAlcancia.darCapacidadBilletes());
         }
         [TestMethod]

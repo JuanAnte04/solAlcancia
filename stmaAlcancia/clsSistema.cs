@@ -28,6 +28,12 @@ namespace appAlcancia.Dominio
         #endregion
         #region Metodos
         #region Constructores
+        public clsSistema()
+        {
+            atrAhorradores = new List<clsPersona>();
+            atrMonedas = new List<clsMoneda>();
+            atrBilletes = new List<clsBillete>();
+        }
         /// <summary>
         /// Solo para pruebas
         /// </summary>
@@ -294,8 +300,7 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool registrarAlcancia(int prmCapacidadMonedas, int prmCapacidadBilletes)
         {
-            //To-do: Implementar
-            return false;
+            return poner(new clsAlcancia(prmCapacidadMonedas, prmCapacidadBilletes));
         }
         /// <summary>
         /// Registra una instancia de personas
@@ -305,8 +310,7 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool registrarPersona(int prmOID, string prmNombre)
         {
-            //To-do: Implementar
-            return false;
+            return asociar(new clsPersona(prmOID, prmNombre));
         }
         /// <summary>
         /// Registra una instancia de moneda
@@ -316,8 +320,7 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool registrarMoneda(int prmDenominacion, int prmAño)
         {
-            //To-do: Implementar
-            return false;
+            return asociar(new clsMoneda(prmDenominacion, prmAño));
         }
         /// <summary>
         /// Registra una instancia de billete
@@ -330,8 +333,7 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool registrarBillete(string prmSerial, int prmDenominacion, int prmAño, int prmMes, int prmDia)
         {
-            //To-do: Implementar
-            return false;
+            return asociar(new clsBillete(prmDenominacion, prmDia, prmMes, prmAño, prmSerial));
         }
         #endregion
         #region Actualizar

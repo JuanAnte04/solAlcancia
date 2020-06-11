@@ -3,6 +3,7 @@ using appAlcancia.Dominio;
 
 namespace uTestAlcancia
 {
+    //Generar y constructor no prm
     [TestClass]
     public class uTestSistema
     {
@@ -181,6 +182,39 @@ namespace uTestAlcancia
             Assert.AreEqual("1889", ObjBillete.darSerial());
             Assert.AreEqual(varCantidadBilletes - 1, ObjSistema.darBilletes().Count);
         }
+        #endregion
+        #region CRUDS
+        #region Registradores
+        [TestMethod]
+        public void uTestRegistrarAlcancia()
+        {
+            ObjSistema = new clsSistema();
+            Assert.AreEqual(true, ObjSistema.registrarAlcancia(400, 100));
+            Assert.AreEqual(400, ObjSistema.darAlcancia().darCapacidadMonedas());
+            Assert.AreEqual(100, ObjSistema.darAlcancia().darCapacidadBilletes());
+        }
+        [TestMethod]
+        public void uTestRegistrarPersona()
+        {
+            ObjSistema = new clsSistema();
+            Assert.AreEqual(true, ObjSistema.registrarPersona(4, "Perez"));
+            Assert.AreEqual(true, ObjSistema.recuperar(4, ref ObjPersona));
+        }
+        [TestMethod]
+        public void uTestRegistrarMoneda()
+        {
+            ObjSistema = new clsSistema();
+            Assert.AreEqual(true, ObjSistema.registrarMoneda(50, 2008));
+            Assert.AreEqual(true, ObjSistema.recuperar(50, ref ObjMoneda));
+        }
+        [TestMethod]
+        public void uTestRegistrarBillete()
+        {
+            ObjSistema = new clsSistema();
+            Assert.AreEqual(true, ObjSistema.registrarBillete("2345", 2000, 2007, 5, 20));
+            Assert.AreEqual(true, ObjSistema.recuperar("2345", ref ObjBillete));
+        }
+        #endregion
         #endregion
         #endregion
     }

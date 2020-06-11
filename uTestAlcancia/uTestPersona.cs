@@ -3,6 +3,7 @@ using appAlcancia.Dominio;
 
 namespace uTestAlcancia
 {
+    //Generar y constructor no prm
     [TestClass]
     public class uTestPersona
     {
@@ -28,6 +29,20 @@ namespace uTestAlcancia
             ObjPersona = new clsPersona();
             ObjPersona.Generar();
             Assert.AreNotEqual(null, ObjPersona.darAlcancia());
+        }
+        [TestMethod]
+        public void uTestDarMonedas()
+        {
+            ObjPersona = new clsPersona();
+            ObjPersona.Generar();
+            Assert.AreNotEqual(null, ObjPersona.darMonedas());
+        }
+        [TestMethod]
+        public void uTestDarBilletes()
+        {
+            ObjPersona = new clsPersona();
+            ObjPersona.Generar();
+            Assert.AreNotEqual(null, ObjPersona.darBilletes());
         }
         #endregion
         #region Mutadores

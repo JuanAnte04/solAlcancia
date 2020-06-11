@@ -3,6 +3,7 @@ using appAlcancia.Dominio;
 
 namespace uTestAlcancia
 {
+    //Generar y constructor no prm
     [TestClass]
     public class uTestMoneda
     {
