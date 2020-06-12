@@ -106,9 +106,10 @@ namespace appAlcancia.Dominio
         /// Modifica el nombre de persona
         /// </summary>
         /// <param name="prmNombre"> Nuevo nombre </param>
-        public void Poner(string prmNombre)
+        public bool Poner(string prmNombre)
         {
             atrNombre = prmNombre;
+            return true;
         }
         /// <summary>
         /// Modifica la alcancia
