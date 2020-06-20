@@ -19,18 +19,39 @@ namespace appAlcancia.Dominio
         /// <summary>
         /// Coleccion de personas
         /// </summary>
-        private List<clsPersona> atrAhorradores = null;
+        private List<clsPersona> atrAhorradores = new List<clsPersona>();
         /// <summary>
         /// Coleccion de monedas
         /// </summary>
-        private List<clsMoneda> atrMonedas = null;
+        private List<clsMoneda> atrMonedas = new List<clsMoneda>();
         /// <summary>
         /// Colecion de billetes
         /// </summary>
-        private List<clsBillete> atrBilletes = null;
+        private List<clsBillete> atrBilletes = new List<clsBillete>();
+        #endregion
+        #region Auxiliares
+        clsPersona auxObjAhorrador = null;
+        clsMoneda auxObjMoneda = null;
+        clsBillete auxObjBillete = null;
         #endregion
         #endregion
         #region Metodos
+        #region Utilitario
+        public void Generar()
+        {
+            atrMonedas = new List<clsMoneda>();
+            atrMonedas.Add(new clsMoneda());
+            atrMonedas.Add(new clsMoneda(100, 1998));
+
+            atrBilletes = new List<clsBillete>();
+            atrBilletes.Add(new clsBillete());
+            atrBilletes.Add(new clsBillete(5000, 27, 2, 1999, "1889"));
+
+            atrAhorradores = new List<clsPersona>();
+            atrAhorradores.Add(new clsPersona());
+            atrAhorradores.Add(new clsPersona(1062, "Jaime"));
+        }
+        #endregion
         #region Constructores
         /// <summary>
         /// Constructor no parametrizado
@@ -45,20 +66,6 @@ namespace appAlcancia.Dominio
         {
             atrCapacidadMonedas = prmCapacidadMonedas;
             atrCapacidadBilletes = prmCapacidadBilletes;
-        }
-        public void Generar()
-        {
-            atrMonedas = new List<clsMoneda>();
-            atrMonedas.Add(new clsMoneda());
-            atrMonedas.Add(new clsMoneda(100, 1998));
-
-            atrBilletes = new List<clsBillete>();
-            atrBilletes.Add(new clsBillete());
-            atrBilletes.Add(new clsBillete(5000, 27, 2, 1999, "1889"));
-
-            atrAhorradores = new List<clsPersona>();
-            atrAhorradores.Add(new clsPersona());
-            atrAhorradores.Add(new clsPersona(1062, "Jaime"));
         }
         #endregion
         #region Accesores
@@ -111,7 +118,7 @@ namespace appAlcancia.Dominio
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo persona </param>
         /// <returns> Boolean </returns>
-        public bool asociar(clsPersona prmObjeto)
+        public bool asociarAhorradorCon(clsPersona prmObjeto)
         {
             atrAhorradores.Add(prmObjeto);
             return true;
@@ -121,7 +128,7 @@ namespace appAlcancia.Dominio
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo moneda </param>
         /// <returns> Boolean </returns>
-        public bool asociar(clsMoneda prmObjeto)
+        public bool asociarMonedaCon(clsMoneda prmObjeto)
         {
             atrMonedas.Add(prmObjeto);
             return true;
@@ -131,7 +138,7 @@ namespace appAlcancia.Dominio
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo billete </param>
         /// <returns> Boolean </returns>
-        public bool asociar(clsBillete prmObjeto)
+        public bool asociarBilleteCon(clsBillete prmObjeto)
         {
             atrBilletes.Add(prmObjeto);
             return true;
@@ -144,16 +151,17 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID"> Identificador de persona </param>
         /// <param name="prmObjeto"> Objeto de tipo persona </param>
         /// <returns> Boolean </returns>
-        public bool disociar(int prmOID, ref clsPersona prmObjeto)
+        public clsPersona disociarAhorradorCon(int prmOID)
         {
-            clsPersona varObjeto = null;
-            if (recuperar(prmOID, ref varObjeto) == true)
-            {
-                prmObjeto = varObjeto;
-                return atrAhorradores.Remove(prmObjeto);
-            }
-            prmObjeto = null;
-            return false;
+            auxObjAhorrador = recuperarPersonaCon(prmOID);
+            atrAhorradores.Remove(auxObjAhorrador);
+            return auxObjAhorrador;
+        }
+        public bool disociarAhorradorCon(clsPersona prmObjeto)
+        {
+            disociarMonedasDe(prmObjeto);
+            disociarBilletesDe(prmObjeto);
+            return atrAhorradores.Remove(prmObjeto);
         }
         /// <summary>
         /// Disocia una instancia de monedas
@@ -161,16 +169,11 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de moneda </param>
         /// <param name="prmObjeto"> Objeto de tipo moneda </param>
         /// <returns> Boolean </returns>
-        public bool disociar(int prmDenominacion, ref clsMoneda prmObjeto)
+        public clsMoneda disociarMonedaCon(int prmDenominacion)
         {
-            clsMoneda varObjeto = null;
-            if (recuperar(prmDenominacion, ref varObjeto) == true)
-            {
-                prmObjeto = varObjeto;
-                return atrMonedas.Remove(prmObjeto);
-            }
-            prmObjeto = null;
-            return false;
+            auxObjMoneda = recuperarMonedaCon(prmDenominacion);
+            atrMonedas.Remove(auxObjMoneda);
+            return auxObjMoneda;
         }
         /// <summary>
         /// Disocia una instancia de billetes
@@ -178,16 +181,39 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de tipo billete </param>
         /// <param name="prmObjeto"> Objeto de tipo billete </param>
         /// <returns> Boolean </returns>
-        public bool disociar(int prmDenominacion, ref clsBillete prmObjeto)
+        public clsBillete disociarBilleteCon(int prmDenominacion)
         {
-            clsBillete varObjeto = null;
-            if (recuperar(prmDenominacion, ref varObjeto) == true)
+            auxObjBillete = recuperarBilleteCon(prmDenominacion);
+            atrBilletes.Remove(auxObjBillete);
+            return auxObjBillete;
+        }
+        public List<clsMoneda> disociarMonedasDe(clsPersona prmAhorrador)
+        {
+            List<clsMoneda> varMonedasDevueltas = new List<clsMoneda>();
+            for (int varIndice = 0; varIndice < atrMonedas.Count; varIndice++)
             {
-                prmObjeto = varObjeto;
-                return atrBilletes.Remove(prmObjeto);
+                if (atrMonedas[varIndice].darPropietario() == prmAhorrador)
+                {
+                    varMonedasDevueltas.Add(atrMonedas[varIndice]);
+                    atrMonedas[varIndice].disociarAlcancia();
+                    atrMonedas.Remove(atrMonedas[varIndice]);
+                }
             }
-            prmObjeto = null;
-            return false;
+            return varMonedasDevueltas;
+        }
+        public List<clsBillete> disociarBilletesDe(clsPersona prmAhorrador)
+        {
+            List<clsBillete> varBilletesDevueltos = new List<clsBillete>();
+            for (int varIndice = 0; varIndice < atrBilletes.Count; varIndice++)
+            {
+                if (atrBilletes[varIndice].darPropietario() == prmAhorrador)
+                {
+                    varBilletesDevueltos.Add(atrBilletes[varIndice]);
+                    atrBilletes[varIndice].disociarAlcancia();
+                    atrBilletes.Remove(atrBilletes[varIndice]);
+                }
+            }
+            return varBilletesDevueltos;
         }
         #endregion
         #region Recuperadores
@@ -197,18 +223,12 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID"> Identificador de persona </param>
         /// <param name="prmObjeto"> Objeto de tipo persona </param>
         /// <returns> Boolean </returns>
-        public bool recuperar(int prmOID, ref clsPersona prmObjeto)
+        public clsPersona recuperarPersonaCon(int prmOID)
         {
-            foreach(clsPersona varObjeto in atrAhorradores)
-            {
+            foreach (clsPersona varObjeto in atrAhorradores)
                 if (varObjeto.darOID() == prmOID)
-                {
-                    prmObjeto = varObjeto;
-                    return true;
-                }
-            }
-            prmObjeto = null;
-            return false;
+                    return varObjeto;
+            return null;
         }
         /// <summary>
         /// Encuentra una instancia de monedas
@@ -216,18 +236,12 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de moneda </param>
         /// <param name="prmObjeto"> Objeto de tipo moneda </param>
         /// <returns> Boolean </returns>
-        public bool recuperar(int prmDenominacion, ref clsMoneda prmObjeto)
+        public clsMoneda recuperarMonedaCon(int prmDenominacion)
         {
             foreach (clsMoneda varObjeto in atrMonedas)
-            {
                 if (varObjeto.darDenominacion() == prmDenominacion)
-                {
-                    prmObjeto = varObjeto;
-                    return true;
-                }
-            }
-            prmObjeto = null;
-            return false;
+                    return varObjeto;
+            return null;
         }
         /// <summary>
         /// Encuentra una instancia de billetes
@@ -235,18 +249,12 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de billete </param>
         /// <param name="prmObjeto"> Objeto de tipo billete </param>
         /// <returns> Boolean </returns>
-        public bool recuperar(int prmDenominacion, ref clsBillete prmObjeto)
+        public clsBillete recuperarBilleteCon(int prmDenominacion)
         {
             foreach (clsBillete varObjeto in atrBilletes)
-            {
                 if (varObjeto.darDenominacion() == prmDenominacion)
-                {
-                    prmObjeto = varObjeto;
-                    return true;
-                }
-            }
-            prmObjeto = null;
-            return false;
+                    return varObjeto;
+            return null;
         }
         #endregion
         #endregion

@@ -23,8 +23,19 @@
         /// </summary>
         protected clsAlcancia atrAlcancia = null;
         #endregion
+        #region Auxiliares
+        clsPersona auxObjPropietario = null;
+        clsAlcancia auxObjAlcancia = null;
+        #endregion
         #endregion
         #region Metodos
+        #region Utilitario
+        public void Generar()
+        {
+            atrPropetario = new clsPersona();
+            atrAlcancia = new clsAlcancia();
+        }
+        #endregion
         #region Constructores
         /// <summary>
         /// Constructor no parametrizado
@@ -39,11 +50,6 @@
         {
             atrDenominacion = prmDenominacion;
             atrAño = prmAño;
-        }
-        public void Generar()
-        {
-            atrPropetario = new clsPersona();
-            atrAlcancia = new clsAlcancia();
         }
         #endregion
         #region Accesores
@@ -81,30 +87,46 @@
         }
         #endregion
         #region Mutadores
+        #endregion
+        #region Asociadores
         /// <summary>
-        /// Modifica el propietario
+        /// Asocia el propietario
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo persona </param>
         /// <returns> Boolean </returns>
-        public bool Poner(clsPersona prmObjeto)
+        public bool asociarPropietarioCon(clsPersona prmObjeto)
         {
+            if (atrPropetario != null)
+                return false;
             atrPropetario = prmObjeto;
             return true;
         }
         /// <summary>
-        /// Modifica la alcancia
+        /// Asocia la alcancia
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo alcancia </param>
         /// <returns> Boolean </returns>
-        public bool Poner(clsAlcancia prmObjeto)
+        public bool asociarAlcanciaCon(clsAlcancia prmObjeto)
         {
+            if (atrAlcancia != null)
+                return false;
             atrAlcancia = prmObjeto;
             return true;
         }
         #endregion
-        #region Asociadores
-        #endregion
         #region Disociadores
+        public clsPersona disociarPropietario()
+        {
+            auxObjPropietario = atrPropetario;
+            atrPropetario = null;
+            return auxObjPropietario;
+        }
+        public clsAlcancia disociarAlcancia()
+        {
+            auxObjAlcancia = atrAlcancia;
+            atrAlcancia = null;
+            return auxObjAlcancia;
+        }
         #endregion
         #region Recuperadores
         #endregion

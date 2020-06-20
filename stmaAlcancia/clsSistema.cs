@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 namespace appAlcancia.Dominio
 {
@@ -26,15 +25,15 @@ namespace appAlcancia.Dominio
         /// </summary>
         private List<clsBillete> atrBilletes = null;
         #endregion
+        #region Auxiliares
+        clsAlcancia auxObjAlcancia = null;
+        clsPersona auxObjAhorrador = null;
+        clsMoneda auxObjMoneda = null;
+        clsBillete auxObjBillete = null;
+        #endregion
         #endregion
         #region Metodos
-        #region Constructores
-        public clsSistema()
-        {
-            atrAhorradores = new List<clsPersona>();
-            atrMonedas = new List<clsMoneda>();
-            atrBilletes = new List<clsBillete>();
-        }
+        #region Utilitario
         /// <summary>
         /// Solo para pruebas
         /// </summary>
@@ -53,6 +52,18 @@ namespace appAlcancia.Dominio
             atrAhorradores = new List<clsPersona>();
             atrAhorradores.Add(new clsPersona());
             atrAhorradores.Add(new clsPersona(1062, "Jaime"));
+
+            atrAhorradores[1].asociarAlcanciaCon(atrAlcancia);
+            atrAlcancia.asociarAhorradorCon(atrAhorradores[1]);
+
+        }
+        #endregion
+        #region Constructores
+        public clsSistema()
+        {
+            atrAhorradores = new List<clsPersona>();
+            atrMonedas = new List<clsMoneda>();
+            atrBilletes = new List<clsBillete>();
         }
         #endregion
         #region Accesores
@@ -90,26 +101,26 @@ namespace appAlcancia.Dominio
         }
         #endregion
         #region Mutadores
+        #endregion
+        #region Asociadores
         /// <summary>
-        /// Modifica el objeto alcancia
+        /// Asocia una alcancia
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo alcancia </param>
         /// <returns> Boolean </returns>
-        public bool poner(clsAlcancia prmObjeto)
+        public bool asociarAlcanciaCon(clsAlcancia prmObjeto)
         {
             atrAlcancia = prmObjeto;
             return true;
         }
-        #endregion
-        #region Asociadores
         /// <summary>
         /// Asocia una persona
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo persona </param>
         /// <returns> Boolean </returns>
-        public bool asociar(clsPersona prmObjeto)
+        public bool asociarAhorradorCon(clsPersona prmObjeto)
         {
-            if (recuperarPersona(prmObjeto.darOID()) == null)
+            if (recuperarPersonaCon(prmObjeto.darOID()) == null)
             {
                 atrAhorradores.Add(prmObjeto);
                 return true;
@@ -121,7 +132,7 @@ namespace appAlcancia.Dominio
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo moneda </param>
         /// <returns> Boolean </returns>
-        public bool asociar(clsMoneda prmObjeto)
+        public bool asociarMonedaCon(clsMoneda prmObjeto)
         {
             atrMonedas.Add(prmObjeto);
             return true;
@@ -131,9 +142,9 @@ namespace appAlcancia.Dominio
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo billete </param>
         /// <returns> Boolean </returns>
-        public bool asociar(clsBillete prmObjeto)
+        public bool asociarBilleteCon(clsBillete prmObjeto)
         {
-            if (recuperarBillete(prmObjeto.darSerial()) == null)
+            if (recuperarBilleteCon(prmObjeto.darSerial()) == null)
             {
                 atrBilletes.Add(prmObjeto);
                 return true;
@@ -148,16 +159,11 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID"> Identificador de persona </param>
         /// <param name="prmObjeto"> Objeto de tipo persona </param>
         /// <returns> Boolean </returns>
-        public bool disociar(int prmOID, ref clsPersona prmObjeto)
+        public clsPersona disociarAhorradorCon(int prmOID)
         {
-            clsPersona varObjeto = recuperarPersona(prmOID);
-            if (varObjeto != null)
-            {
-                prmObjeto = varObjeto;
-                return atrAhorradores.Remove(prmObjeto);
-            }
-            prmObjeto = null;
-            return false;
+            auxObjAhorrador = recuperarPersonaCon(prmOID);
+            atrAhorradores.Remove(auxObjAhorrador);
+            return auxObjAhorrador;
         }
         /// <summary>
         /// Disocia una moneda
@@ -165,16 +171,11 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de moneda </param>
         /// <param name="prmObjeto"> Objeto de tipo moneda </param>
         /// <returns> Boolean </returns>
-        public bool disociar(int prmDenominacion, ref clsMoneda prmObjeto)
+        public clsMoneda disociarMonedaCon(int prmDenominacion)
         {
-            clsMoneda varObjeto = recuperarMoneda(prmDenominacion);
-            if (varObjeto != null)
-            {
-                prmObjeto = varObjeto;
-                return atrMonedas.Remove(prmObjeto);
-            }
-            prmObjeto = null;
-            return false;
+            auxObjMoneda = recuperarMonedaCon(prmDenominacion);
+            atrMonedas.Remove(auxObjMoneda);
+            return auxObjMoneda;
         }
         /// <summary>
         /// Disocia un billete por denominacion
@@ -182,16 +183,11 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de billete </param>
         /// <param name="prmObjeto"> Objeto de tipo billete </param>
         /// <returns> Boolean </returns>
-        public bool disociar(int prmDenominacion, ref clsBillete prmObjeto)
+        public clsBillete disociarBilleteCon(int prmDenominacion)
         {
-            clsBillete varObjeto = recuperarBillete(prmDenominacion);
-            if (varObjeto != null)
-            {
-                prmObjeto = varObjeto;
-                return atrBilletes.Remove(prmObjeto);
-            }
-            prmObjeto = null;
-            return false;
+            auxObjBillete = recuperarBilleteCon(prmDenominacion);
+            atrBilletes.Remove(auxObjBillete);
+            return auxObjBillete;
         }
         /// <summary>
         /// Disocia un billete por serial
@@ -199,16 +195,11 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de billete </param>
         /// <param name="prmObjeto"> Objeto de tipo billete </param>
         /// <returns> Boolean </returns>
-        public bool disociar(string prmSerial, ref clsBillete prmObjeto)
+        public clsBillete disociarBilleteCon(string prmSerial)
         {
-            clsBillete varObjeto = recuperarBillete(prmSerial);
-            if (varObjeto != null)
-            {
-                prmObjeto = varObjeto;
-                return atrBilletes.Remove(prmObjeto);
-            }
-            prmObjeto = null;
-            return false;
+            auxObjBillete = recuperarBilleteCon(prmSerial);
+            atrBilletes.Remove(auxObjBillete);
+            return auxObjBillete;
         }
         #endregion
         #region Recuperadores
@@ -218,7 +209,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID"> Identificador de persona </param>
         /// <param name="prmObjeto"> Objeto de tipo persona </param>
         /// <returns> Boolean </returns>
-        public clsPersona recuperarPersona(int prmOID)
+        public clsPersona recuperarPersonaCon(int prmOID)
         {
             foreach (clsPersona varObjeto in atrAhorradores)
                 if (varObjeto.darOID() == prmOID)
@@ -231,7 +222,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de moneda </param>
         /// <param name="prmObjeto"> Objeto de tipo moneda </param>
         /// <returns> Boolean </returns>
-        public clsMoneda recuperarMoneda(int prmDenominacion)
+        public clsMoneda recuperarMonedaCon(int prmDenominacion)
         {
             foreach (clsMoneda varObjeto in atrMonedas)
                 if (varObjeto.darDenominacion() == prmDenominacion)
@@ -244,7 +235,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Valor monetario </param>
         /// <param name="prmObjeto"> Objeto de tipo billete </param>
         /// <returns> Boolean </returns>
-        public clsBillete recuperarBillete(int prmDenominacion)
+        public clsBillete recuperarBilleteCon(int prmDenominacion)
         {
             foreach (clsBillete varObjeto in atrBilletes)
                 if (varObjeto.darDenominacion() == prmDenominacion)
@@ -257,7 +248,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmSerial"> Identificador de billete </param>
         /// <param name="prmObjeto"></param>
         /// <returns></returns>
-        public clsBillete recuperarBillete(string prmSerial)
+        public clsBillete recuperarBilleteCon(string prmSerial)
         {
             foreach (clsBillete varObjeto in atrBilletes)
                 if (varObjeto.darSerial() == prmSerial)
@@ -273,9 +264,9 @@ namespace appAlcancia.Dominio
         /// <param name="prmCapacidadMonedas"> Cantidad maxima de monedas </param>
         /// <param name="prmCapacidadBilletes"> Cantidad maxima de billetes </param>
         /// <returns> Boolean </returns>
-        public bool registrarAlcancia(int prmCapacidadMonedas, int prmCapacidadBilletes)
+        public bool registrarAlcanciaCon(int prmCapacidadMonedas, int prmCapacidadBilletes)
         {
-            return poner(new clsAlcancia(prmCapacidadMonedas, prmCapacidadBilletes));
+            return asociarAlcanciaCon(new clsAlcancia(prmCapacidadMonedas, prmCapacidadBilletes));
         }
         /// <summary>
         /// Registra una instancia de personas
@@ -283,9 +274,9 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID"> Identificador de persona </param>
         /// <param name="prmNombre"> Nombre de la persona </param>
         /// <returns> Boolean </returns>
-        public bool registrarPersona(int prmOID, string prmNombre)
+        public bool registrarPersonaCon(int prmOID, string prmNombre)
         {
-            return asociar(new clsPersona(prmOID, prmNombre));
+            return asociarAhorradorCon(new clsPersona(prmOID, prmNombre));
         }
         /// <summary>
         /// Registra una instancia de moneda
@@ -293,9 +284,9 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Valor monetario </param>
         /// <param name="prmAño"> Año de emision </param>
         /// <returns> Boolean </returns>
-        public bool registrarMoneda(int prmDenominacion, int prmAño)
+        public bool registrarMonedaCon(int prmDenominacion, int prmAño)
         {
-            return asociar(new clsMoneda(prmDenominacion, prmAño));
+            return asociarMonedaCon(new clsMoneda(prmDenominacion, prmAño));
         }
         /// <summary>
         /// Registra una instancia de billete
@@ -306,9 +297,9 @@ namespace appAlcancia.Dominio
         /// <param name="prmMes"> Mes de emision </param>
         /// <param name="prmDia"> Dia de emision </param>
         /// <returns> Boolean </returns>
-        public bool registrarBillete(string prmSerial, int prmDenominacion, int prmAño, int prmMes, int prmDia)
+        public bool registrarBilleteCon(string prmSerial, int prmDenominacion, int prmAño, int prmMes, int prmDia)
         {
-            return asociar(new clsBillete(prmDenominacion, prmDia, prmMes, prmAño, prmSerial));
+            return asociarBilleteCon(new clsBillete(prmDenominacion, prmDia, prmMes, prmAño, prmSerial));
         }
         #endregion
         #region Actualizadores
@@ -320,30 +311,7 @@ namespace appAlcancia.Dominio
         /// <returns> Boolean </returns>
         public bool actualizarPersona(int prmOID, string prmNombre)
         {
-            return recuperarPersona(prmOID).Poner(prmNombre);
-        }
-        /// <summary>
-        /// Modifica una instancia de monedas
-        /// </summary>
-        /// <param name="prmDenominacion"> Valor monetario </param>
-        /// <param name="prmAño"> Año de emision </param>
-        /// <returns> Boolean </returns>
-        public bool actualizarMoneda(int prmDenominacion, clsPersona prmPropietario)
-        {
-            return recuperarMoneda(prmDenominacion).Poner(prmPropietario);
-        }
-        /// <summary>
-        /// Modifica una instancia de billetes
-        /// </summary>
-        /// <param name="prmSerial"> Identificador de billete </param>
-        /// <param name="prmDenominacion"> Valor monetario </param>
-        /// <param name="prmAño"> Año de emision </param>
-        /// <param name="prmMes"> Mes de emision </param>
-        /// <param name="prmDia"> Dia de emision </param>
-        /// <returns> Boolean </returns>
-        public bool actualizarBillete(int prmDenominacion, clsPersona prmPropietario)
-        {
-            return recuperarBillete(prmDenominacion).Poner(prmPropietario);
+            return recuperarPersonaCon(prmOID).Poner(prmNombre);
         }
         #endregion
         #region Eliminadores
@@ -352,7 +320,7 @@ namespace appAlcancia.Dominio
         /// </summary>
         /// <param name="prmObjeto"> Objeto de tipo alcancia </param>
         /// <returns> Boolean </returns>
-        public bool eliminarAlcancia(ref clsAlcancia prmObjeto)
+        public bool eliminarAlcanciaCon(ref clsAlcancia prmObjeto)
         {
             //To-do: Implementar
             return false;
@@ -363,10 +331,12 @@ namespace appAlcancia.Dominio
         /// <param name="prmOID"> Identificador de personas </param>
         /// <param name="prmObjeto"> Objeto de tipo persona </param>
         /// <returns> Boolean </returns>
-        public bool eliminarPersona(int prmOID, ref clsPersona prmObjeto)
+        public clsPersona eliminarAhorradorCon(int prmOID)
         {
-            //To-do: Implementar
-            return false;
+            auxObjAhorrador = disociarAhorradorCon(prmOID);
+            if (auxObjAhorrador != null)
+                return auxObjAhorrador.destruir();
+            return null;
         }
         /// <summary>
         /// Elimina una instancia de monedas
@@ -374,7 +344,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmDenominacion"> Identificador de moneda </param>
         /// <param name="prmObjeto"> Objeto de tipo moneda </param>
         /// <returns> Boolean </returns>
-        public bool eliminarMoneda(int prmDenominacion, ref clsMoneda prmObjeto)
+        public bool eliminarMonedaCon(int prmDenominacion)
         {
             //To-do: Implementar
             return false;
@@ -385,7 +355,7 @@ namespace appAlcancia.Dominio
         /// <param name="prmSerial"> Identificador de billete </param>
         /// <param name="prmObjeto"> Objeto de tipo billete </param>
         /// <returns> Boolean </returns>
-        public bool eliminarBillete(string prmSerial, ref clsBillete prmObjeto)
+        public bool eliminarBilleteCon(string prmSerial)
         {
             //To-do: Implementar
             return false;

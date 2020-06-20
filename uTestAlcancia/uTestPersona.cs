@@ -10,6 +10,7 @@ namespace uTestAlcancia
         private clsPersona ObjPersona;
         private clsMoneda ObjMoneda, ObjMonedaEsperada;
         private clsBillete ObjBillete, ObjBilleteEsperado;
+        int varValorMaximo;
         #region Accesores
         [TestMethod]
         public void uTestdarOID()
@@ -57,7 +58,7 @@ namespace uTestAlcancia
         public void uTestponerAlcancia()
         {
             ObjPersona = new clsPersona();
-            Assert.AreEqual(true, ObjPersona.Poner(new clsAlcancia()));
+            Assert.AreEqual(true, ObjPersona.asociarAlcanciaCon(new clsAlcancia()));
             Assert.AreNotEqual(null, ObjPersona.darAlcancia());
         }
         #endregion
@@ -75,20 +76,15 @@ namespace uTestAlcancia
         [TestMethod]
         public void uTestRecuperarMoneda()
         {
-            ObjPersona = new clsPersona();
             ObjPersona.Generar();
-            ObjMoneda = new clsMoneda();
-            Assert.AreEqual(true, ObjPersona.Recuperar(500, ref ObjMoneda));
-            Assert.AreEqual(500, ObjMoneda.darDenominacion());
+            Assert.AreEqual(500, new clsPersona().recuperarMonedaCon(500).darDenominacion());
         }
         [TestMethod]
         public void uTestRecuperarBillete()
         {
             ObjPersona = new clsPersona();
             ObjPersona.Generar();
-            ObjBillete = new clsBillete();
-            Assert.AreEqual(true, ObjPersona.Recuperar(2000, ref ObjBillete));
-            Assert.AreEqual(2000, ObjBillete.darDenominacion());
+            Assert.AreEqual(2000, ObjPersona.recuperarBilleteCon(2000).darDenominacion());
         }
         #endregion
         #region Asociadores
@@ -98,9 +94,8 @@ namespace uTestAlcancia
             ObjPersona = new clsPersona();
             ObjPersona.Generar();
             ObjMoneda = new clsMoneda(50, 2005);
-            Assert.AreEqual(true, ObjPersona.asociar(ObjMoneda));
-            Assert.AreEqual(true, ObjPersona.Recuperar(50, ref ObjMonedaEsperada));
-            Assert.AreEqual(ObjMonedaEsperada, ObjMoneda);
+            Assert.AreEqual(true, ObjPersona.asociarMonedaCon(ObjMoneda));
+            Assert.AreEqual(ObjMoneda, ObjPersona.recuperarMonedaCon(50));
         }
         [TestMethod]
         public void uTestAsociarBillete()
@@ -108,9 +103,8 @@ namespace uTestAlcancia
             ObjPersona = new clsPersona();
             ObjPersona.Generar();
             ObjBillete = new clsBillete(20000, 5, 6, 2016, "2180");
-            Assert.AreEqual(true, ObjPersona.asociar(ObjBillete));
-            Assert.AreEqual(true, ObjPersona.Recuperar(20000, ref ObjBilleteEsperado));
-            Assert.AreEqual(ObjBilleteEsperado, ObjBillete);
+            Assert.AreEqual(true, ObjPersona.asociarBilleteCon(ObjBillete));
+            Assert.AreEqual(ObjBillete, ObjPersona.recuperarBilleteCon(20000));
         }
         #endregion
         #region Disociadores
@@ -119,22 +113,18 @@ namespace uTestAlcancia
         {
             ObjPersona = new clsPersona();
             ObjPersona.Generar();
-            ObjMoneda = null;
-            int varCantidadMonedas = ObjPersona.darMonedas().Count;
-            Assert.AreEqual(true, ObjPersona.disociar(500, ref ObjMoneda));
-            Assert.AreEqual(500, ObjMoneda.darDenominacion());
-            Assert.AreEqual(varCantidadMonedas - 1, ObjPersona.darMonedas().Count);
+            varValorMaximo = ObjPersona.darMonedas().Count - 1;
+            Assert.AreEqual(500, ObjPersona.disociarMonedaCon(500).darDenominacion());
+            Assert.AreEqual(varValorMaximo, ObjPersona.darMonedas().Count);
         }
         [TestMethod]
         public void uTestDisociarBilleteDenominacion()
         {
             ObjPersona = new clsPersona();
             ObjPersona.Generar();
-            ObjBillete = null;
-            int varCantidadBilletes = ObjPersona.darBilletes().Count;
-            Assert.AreEqual(true, ObjPersona.disociar(2000, ref ObjBillete));
-            Assert.AreEqual(2000, ObjBillete.darDenominacion());
-            Assert.AreEqual(varCantidadBilletes - 1, ObjPersona.darBilletes().Count);
+            varValorMaximo = ObjPersona.darBilletes().Count - 1;
+            Assert.AreEqual(2000, ObjPersona.disociarBilleteCon(2000).darDenominacion());
+            Assert.AreEqual(varValorMaximo, ObjPersona.darBilletes().Count);
         }
         #endregion
     }

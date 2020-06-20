@@ -12,6 +12,7 @@ namespace uTestAlcancia
         private clsMoneda ObjMoneda, ObjMonedaEsperada;
         private clsBillete ObjBillete, ObjBilleteEsperado;
         private clsPersona ObjPersona, ObjPersonaEsperada;
+        int varValorMaximo;
         [TestMethod]
         public void uTestdarCapacidadMonedas()
         {
@@ -56,26 +57,20 @@ namespace uTestAlcancia
         [TestMethod]
         public void uTestrecuperarMoneda()
         {
-            ObjAlcancia = new clsAlcancia();
             ObjAlcancia.Generar();
-            Assert.AreEqual(true, ObjAlcancia.recuperar(100, ref ObjMoneda));
-            Assert.AreEqual(100, ObjMoneda.darDenominacion());
+            Assert.AreEqual(100, new clsAlcancia().recuperarMonedaCon(100).darDenominacion());
         }
         [TestMethod]
         public void uTestRecuperarBillete()
         {
-            ObjAlcancia = new clsAlcancia();
             ObjAlcancia.Generar();
-            Assert.AreEqual(true, ObjAlcancia.recuperar(5000, ref ObjBillete));
-            Assert.AreEqual(5000, ObjBillete.darDenominacion());
+            Assert.AreEqual(5000, new clsAlcancia().recuperarBilleteCon(5000).darDenominacion());
         }
         [TestMethod]
         public void uTestRecuperarPesona()
         {
-            ObjAlcancia = new clsAlcancia();
             ObjAlcancia.Generar();
-            Assert.AreEqual(true, ObjAlcancia.recuperar(1062, ref ObjPersona));
-            Assert.AreEqual(1062, ObjPersona.darOID());
+            Assert.AreEqual(1062, new clsAlcancia().recuperarPersonaCon(1062).darOID());
         }
         [TestMethod]
         public void uTestAsociarMoneda()
@@ -83,62 +78,53 @@ namespace uTestAlcancia
             ObjAlcancia = new clsAlcancia();
             ObjAlcancia.Generar();
             ObjMoneda = new clsMoneda(200, 2006);
-            Assert.AreEqual(true, ObjAlcancia.asociar(ObjMoneda));
-            Assert.AreEqual(true, ObjAlcancia.recuperar(200, ref ObjMonedaEsperada));
-            Assert.AreEqual(ObjMonedaEsperada, ObjMoneda);
+            Assert.AreEqual(true, ObjAlcancia.asociarMonedaCon(ObjMoneda));
+            Assert.AreEqual(ObjMoneda, ObjAlcancia.recuperarMonedaCon(200));
         }
         [TestMethod]
         public void uTestAsociarBillete()
         {
             ObjAlcancia = new clsAlcancia();
-            ObjBillete = new clsBillete(50000, 6, 7, 2003, "5670");
             ObjAlcancia.Generar();
-            Assert.AreEqual(true, ObjAlcancia.asociar(ObjBillete));
-            Assert.AreEqual(true, ObjAlcancia.recuperar(50000, ref ObjBilleteEsperado));
-            Assert.AreEqual(ObjBilleteEsperado, ObjBillete);
+            ObjBillete = new clsBillete(50000, 6, 7, 2003, "5670");
+            Assert.AreEqual(true, ObjAlcancia.asociarBilleteCon(ObjBillete));
+            Assert.AreEqual(ObjBillete, ObjAlcancia.recuperarBilleteCon(50000));
         }
         [TestMethod]
         public void uTestAsociarPersona()
         {
             ObjAlcancia = new clsAlcancia();
-            ObjPersona = new clsPersona(1791, "Manuel");
             ObjAlcancia.Generar();
-            Assert.AreEqual(true, ObjAlcancia.asociar(ObjPersona));
-            Assert.AreEqual(true, ObjAlcancia.recuperar(1791, ref ObjPersonaEsperada));
-            Assert.AreEqual(ObjPersonaEsperada, ObjPersona);
+            ObjPersona = new clsPersona(1791, "Manuel");
+            Assert.AreEqual(true, ObjAlcancia.asociarAhorradorCon(ObjPersona));
+            Assert.AreEqual(ObjPersona, ObjAlcancia.recuperarPersonaCon(1791));
         }
         [TestMethod]
         public void uTestDisociarPersona()
         {
             ObjAlcancia = new clsAlcancia();
             ObjAlcancia.Generar();
-            ObjPersona = null;
-            int varCantidadPersonas = ObjAlcancia.darPersonas().Count;
-            Assert.AreEqual(true, ObjAlcancia.disociar(1062, ref ObjPersona));
-            Assert.AreEqual(1062, ObjPersona.darOID());
-            Assert.AreEqual(varCantidadPersonas - 1, ObjAlcancia.darPersonas().Count);
+            varValorMaximo = ObjAlcancia.darPersonas().Count;
+            Assert.AreEqual(1062, ObjAlcancia.disociarAhorradorCon(1062).darOID());
+            Assert.AreEqual(varValorMaximo - 1, ObjAlcancia.darPersonas().Count);
         }
         [TestMethod]
         public void uTestDisociarMoneda()
         {
             ObjAlcancia = new clsAlcancia();
             ObjAlcancia.Generar();
-            ObjMoneda = null;
-            int varCantidadMonedas = ObjAlcancia.darMonedas().Count;
-            Assert.AreEqual(true, ObjAlcancia.disociar(100, ref ObjMoneda));
-            Assert.AreEqual(100, ObjMoneda.darDenominacion());
-            Assert.AreEqual(varCantidadMonedas - 1, ObjAlcancia.darMonedas().Count);
+            varValorMaximo = ObjAlcancia.darMonedas().Count;
+            Assert.AreEqual(100, ObjAlcancia.disociarMonedaCon(100).darDenominacion());
+            Assert.AreEqual(varValorMaximo - 1, ObjAlcancia.darMonedas().Count);
         }
         [TestMethod]
         public void uTestDisociarBilleteDenominacion()
         {
             ObjAlcancia = new clsAlcancia();
             ObjAlcancia.Generar();
-            ObjBillete = null;
-            int varCantidadBilletes = ObjAlcancia.darBilletes().Count;
-            Assert.AreEqual(true, ObjAlcancia.disociar(5000, ref ObjBillete));
-            Assert.AreEqual(5000, ObjBillete.darDenominacion());
-            Assert.AreEqual(varCantidadBilletes - 1, ObjAlcancia.darBilletes().Count);
+            varValorMaximo = ObjAlcancia.darBilletes().Count;
+            Assert.AreEqual(5000, ObjAlcancia.disociarBilleteCon(5000).darDenominacion());
+            Assert.AreEqual(varValorMaximo - 1, ObjAlcancia.darBilletes().Count);
         }
     }
 }

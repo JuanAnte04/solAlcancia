@@ -9,9 +9,10 @@ namespace uTestAlcancia
     {
         #region Objetos de prueba
         clsSistema ObjSistema;
-        clsMoneda ObjMoneda, ObjMonedaEsperada;
-        clsBillete ObjBillete, ObjBilleteEsperado;
+        clsMoneda ObjMoneda;
+        clsBillete ObjBillete;
         clsPersona ObjPersona;
+        int auxCantidadFinal = -1;
         #endregion
         #region Metodos de prueba
         #region Accesores
@@ -43,10 +44,10 @@ namespace uTestAlcancia
         #endregion
         #region Mutadores
         [TestMethod]
-        public void uTestponerAlcancia()
+        public void uTestAsociarAlcancia()
         {
             ObjSistema = new clsSistema();
-            Assert.AreEqual(true, ObjSistema.poner(new clsAlcancia()));
+            Assert.AreEqual(true, ObjSistema.asociarAlcanciaCon(new clsAlcancia()));
             Assert.AreNotEqual(null, ObjSistema.darAlcancia());
         }
         #endregion
@@ -56,28 +57,28 @@ namespace uTestAlcancia
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            Assert.AreEqual(100, ObjSistema.recuperarMoneda(100).darDenominacion());
+            Assert.AreEqual(100, ObjSistema.recuperarMonedaCon(100).darDenominacion());
         }
         [TestMethod]
         public void uTestRecuperarBilleteDenominacion()
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            Assert.AreEqual(5000, ObjSistema.recuperarBillete(5000).darDenominacion());
+            Assert.AreEqual(5000, ObjSistema.recuperarBilleteCon(5000).darDenominacion());
         }
         [TestMethod]
         public void uTestRecuperarBilleteSerial()
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            Assert.AreEqual("1889", ObjSistema.recuperarBillete("1889").darSerial());
+            Assert.AreEqual("1889", ObjSistema.recuperarBilleteCon("1889").darSerial());
         }
         [TestMethod]
         public void uTestRecuperarPesona()
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            Assert.AreEqual("Jaime", ObjSistema.recuperarPersona(1062).darNombre());
+            Assert.AreEqual("Jaime", ObjSistema.recuperarPersonaCon(1062).darNombre());
         }
         #endregion
         #region Asociadores
@@ -86,35 +87,33 @@ namespace uTestAlcancia
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            ObjPersona = new clsPersona(1063, "Pepito");
-            Assert.AreEqual(true, ObjSistema.asociar(ObjPersona));
-            Assert.AreNotEqual(null, ObjSistema.recuperarPersona(1063));
-            Assert.AreEqual(ObjPersona, ObjSistema.recuperarPersona(1063));
+            Assert.AreEqual(true, ObjSistema.asociarAhorradorCon(new clsPersona(1063, "Pepito")));
+            Assert.AreEqual(1063, ObjSistema.recuperarPersonaCon(1063).darOID());
+            Assert.AreEqual("Pepito", ObjSistema.recuperarPersonaCon(1063).darNombre());
         }
         [TestMethod]
         public void uTestAsociarPersonaExistente()
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            ObjPersona = new clsPersona(-1, "Pepito");
-            Assert.AreEqual(false, ObjSistema.asociar(ObjPersona));
-            Assert.AreNotEqual("Pepito", ObjSistema.recuperarPersona(-1).darNombre());
+            Assert.AreEqual(false, ObjSistema.asociarAhorradorCon(new clsPersona(-1, "Pepito")));
+            Assert.AreEqual("n.n", ObjSistema.recuperarPersonaCon(-1).darNombre());
         }
         [TestMethod]
         public void uTestAsociarMoneda()
         {
             ObjSistema = new clsSistema();
             ObjMoneda = new clsMoneda(200, 1997);
-            Assert.AreEqual(true, ObjSistema.asociar(ObjMoneda));
-            Assert.AreEqual(ObjMoneda, ObjSistema.recuperarMoneda(200));
+            Assert.AreEqual(true, ObjSistema.asociarMonedaCon(ObjMoneda));
+            Assert.AreEqual(ObjMoneda, ObjSistema.recuperarMonedaCon(200));
         }
         [TestMethod]
         public void uTestAsociarBilleteNuevo()
         {
             ObjSistema = new clsSistema();
             ObjBillete = new clsBillete(10000, 30, 2, 2006, "1888");
-            Assert.AreEqual(true, ObjSistema.asociar(ObjBillete));
-            Assert.AreEqual(ObjBillete, ObjSistema.recuperarBillete("1888"));
+            Assert.AreEqual(true, ObjSistema.asociarBilleteCon(ObjBillete));
+            Assert.AreEqual(ObjBillete, ObjSistema.recuperarBilleteCon("1888"));
         }
         [TestMethod]
         public void uTestAsociarBilleteExistente()
@@ -122,8 +121,8 @@ namespace uTestAlcancia
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
             ObjBillete = new clsBillete(1000, 4, 4, 2002, "1889");
-            Assert.AreEqual(false, ObjSistema.asociar(ObjBillete));
-            Assert.AreNotEqual(ObjBillete, ObjSistema.recuperarBillete("1889"));
+            Assert.AreEqual(false, ObjSistema.asociarBilleteCon(ObjBillete));
+            Assert.AreNotEqual(ObjBillete, ObjSistema.recuperarBilleteCon("1889"));
         }
         #endregion
         #region Disociadores
@@ -132,44 +131,38 @@ namespace uTestAlcancia
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            ObjPersona = null;
-            int varCantidadPersonas = ObjSistema.darPersonas().Count;
-            Assert.AreEqual(true, ObjSistema.disociar(1062, ref ObjPersona));
-            Assert.AreEqual(1062, ObjPersona.darOID());
-            Assert.AreEqual(varCantidadPersonas - 1, ObjSistema.darPersonas().Count);
+            auxCantidadFinal = ObjSistema.darPersonas().Count - 1;
+            Assert.AreEqual(1062, ObjSistema.disociarAhorradorCon(1062).darOID());
+            Assert.AreEqual(null, ObjSistema.recuperarPersonaCon(1062));
+            Assert.AreEqual(auxCantidadFinal, ObjSistema.darPersonas().Count);
         }
         [TestMethod]
         public void uTestDisociarMoneda()
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            ObjMoneda = null;
-            int varCantidadMonedas = ObjSistema.darMonedas().Count;
-            Assert.AreEqual(true, ObjSistema.disociar(100, ref ObjMoneda));
-            Assert.AreEqual(100, ObjMoneda.darDenominacion());
-            Assert.AreEqual(varCantidadMonedas - 1, ObjSistema.darMonedas().Count);
+            auxCantidadFinal = ObjSistema.darMonedas().Count - 1;
+            Assert.AreEqual(100, ObjSistema.disociarMonedaCon(100).darDenominacion());
+            Assert.AreEqual(auxCantidadFinal, ObjSistema.darMonedas().Count);
         }
         [TestMethod]
         public void uTestDisociarBilleteDenominacion()
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            ObjBillete = null;
-            int varCantidadBilletes = ObjSistema.darBilletes().Count;
-            Assert.AreEqual(true, ObjSistema.disociar(5000, ref ObjBillete));
-            Assert.AreEqual(5000, ObjBillete.darDenominacion());
-            Assert.AreEqual(varCantidadBilletes - 1, ObjSistema.darBilletes().Count);
+            auxCantidadFinal = ObjSistema.darBilletes().Count - 1;
+            Assert.AreEqual(5000, ObjSistema.disociarBilleteCon(5000).darDenominacion());
+            Assert.AreEqual(auxCantidadFinal, ObjSistema.darBilletes().Count);
         }
         [TestMethod]
         public void uTestDisociarBilleteSerial()
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            ObjBillete = null;
-            int varCantidadBilletes = ObjSistema.darBilletes().Count;
-            Assert.AreEqual(true, ObjSistema.disociar("1889", ref ObjBillete));
-            Assert.AreEqual("1889", ObjBillete.darSerial());
-            Assert.AreEqual(varCantidadBilletes - 1, ObjSistema.darBilletes().Count);
+            auxCantidadFinal = ObjSistema.darBilletes().Count - 1;
+            Assert.AreEqual("1889", ObjSistema.disociarBilleteCon("1889").darSerial());
+            Assert.AreEqual(null, ObjSistema.recuperarBilleteCon("1889"));
+            Assert.AreEqual(auxCantidadFinal, ObjSistema.darBilletes().Count);
         }
         #endregion
         #region CRUDS
@@ -178,7 +171,7 @@ namespace uTestAlcancia
         public void uTestRegistrarAlcancia()
         {
             ObjSistema = new clsSistema();
-            Assert.AreEqual(true, ObjSistema.registrarAlcancia(400, 100));
+            Assert.AreEqual(true, ObjSistema.registrarAlcanciaCon(400, 100));
             Assert.AreEqual(400, ObjSistema.darAlcancia().darCapacidadMonedas());
             Assert.AreEqual(100, ObjSistema.darAlcancia().darCapacidadBilletes());
         }
@@ -186,22 +179,23 @@ namespace uTestAlcancia
         public void uTestRegistrarPersona()
         {
             ObjSistema = new clsSistema();
-            Assert.AreEqual(true, ObjSistema.registrarPersona(4, "Perez"));
-            Assert.AreEqual("Perez", ObjSistema.recuperarPersona(4).darNombre());
+            Assert.AreEqual(true, ObjSistema.registrarPersonaCon(4, "Perez"));
+            Assert.AreEqual("Perez", ObjSistema.recuperarPersonaCon(4).darNombre());
         }
         [TestMethod]
         public void uTestRegistrarMoneda()
         {
             ObjSistema = new clsSistema();
-            Assert.AreEqual(true, ObjSistema.registrarMoneda(50, 2008));
-            Assert.AreEqual(2008, ObjSistema.recuperarMoneda(50).darAño());
+            Assert.AreEqual(true, ObjSistema.registrarMonedaCon(50, 2008));
+            Assert.AreEqual(2008, ObjSistema.recuperarMonedaCon(50).darAño());
         }
         [TestMethod]
         public void uTestRegistrarBillete()
         {
             ObjSistema = new clsSistema();
-            Assert.AreEqual(true, ObjSistema.registrarBillete("2345", 2000, 2007, 5, 20));
-            Assert.AreEqual(2000, ObjSistema.recuperarBillete("2345").darDenominacion());
+            Assert.AreEqual(true, ObjSistema.registrarBilleteCon("2345", 2000, 2007, 5, 20));
+            Assert.AreEqual("2345", ObjSistema.recuperarBilleteCon("2345").darSerial());
+            Assert.AreEqual(2000, ObjSistema.recuperarBilleteCon("2345").darDenominacion());
         }
         #endregion
         #region Actualizadores
@@ -211,23 +205,31 @@ namespace uTestAlcancia
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
             Assert.AreEqual(true, ObjSistema.actualizarPersona(-1, "Climaco"));
-            Assert.AreEqual("Climaco", ObjSistema.recuperarPersona(-1).darNombre());
+            Assert.AreEqual("Climaco", ObjSistema.recuperarPersonaCon(-1).darNombre());
         }
+        #endregion
+        #region Eliminadores
         [TestMethod]
-        public void uTestActualizarMoneda()
+        public void uTestEliminarAhorradorCon()
         {
             ObjSistema = new clsSistema();
             ObjSistema.Generar();
-            Assert.AreEqual(true, ObjSistema.actualizarMoneda(100, ObjSistema.recuperarPersona(-1)));
-            Assert.AreEqual("n.n", ObjSistema.recuperarMoneda(100).darPropietario().darNombre());
+            ObjPersona = ObjSistema.eliminarAhorradorCon(1062);
+            Assert.AreNotEqual(null, ObjPersona);
+            Assert.AreEqual(null, ObjPersona.darAlcancia());
+            Assert.AreEqual(0, ObjPersona.darMonedas().Count);
+            Assert.AreEqual(0, ObjPersona.darBilletes().Count);
+
         }
         [TestMethod]
-        public void uTestActualizarBillete()
+        public void uTestEliminarMoneda()
         {
-            ObjSistema = new clsSistema();
-            ObjSistema.Generar();
-            Assert.AreEqual(true, ObjSistema.actualizarBillete(5000, ObjSistema.recuperarPersona(1062)));
-            Assert.AreEqual("Jaime", ObjSistema.recuperarBillete(5000).darPropietario().darNombre());
+
+        }
+        [TestMethod]
+        public void uTestEliminarBillete()
+        {
+
         }
         #endregion
         #endregion

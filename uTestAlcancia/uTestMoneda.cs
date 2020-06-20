@@ -41,14 +41,14 @@ namespace uTestAlcancia
         public void uTestponerPropietario()
         {
             ObjMoneda = new clsMoneda();
-            Assert.AreEqual(true, ObjMoneda.Poner(new clsPersona()));
+            Assert.AreEqual(true, ObjMoneda.asociarPropietarioCon(new clsPersona()));
             Assert.AreNotEqual(null, ObjMoneda.darPropietario());
         }
         [TestMethod]
         public void uTestponerAlcancia()
         {
             ObjMoneda = new clsMoneda();
-            Assert.AreEqual(true, ObjMoneda.Poner(new clsAlcancia()));
+            Assert.AreEqual(true, ObjMoneda.asociarAlcanciaCon(new clsAlcancia()));
             Assert.AreNotEqual(null, ObjMoneda.darAlcancia());
         }
         #endregion

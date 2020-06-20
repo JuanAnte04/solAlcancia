@@ -48,9 +48,9 @@
   <ItemGroup>
     <Compile Include="clsBillete.cs" />
     <Compile Include="clsAlcancia.cs" />
-    <Compile Include="clsSistema.cs" />
     <Compile Include="clsPersona.cs" />
     <Compile Include="clsMoneda.cs" />
+    <Compile Include="clsSistema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

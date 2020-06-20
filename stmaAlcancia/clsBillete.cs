@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace appAlcancia.Dominio
+﻿namespace appAlcancia.Dominio
 {
     public class clsBillete : clsMoneda
     {
